@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "FastAPI Debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend\\main.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend"
+            },
+            "args": [
+                "--reload"
+            ]
+        }
+    ]
+}
