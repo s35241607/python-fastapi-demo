@@ -1,9 +1,102 @@
 [project]
-name = "backend"
+name = "ticket-system-backend"
 version = "0.1.0"
-description = "Add your description here"
+description = "Ticket System Backend API using FastAPI"
+authors = [{ name = "LanJJ Lin", email = "LanJJ_Lin@aseglobal.com" }]
 readme = "README.md"
-requires-python = ">=3.12.10"
+requires-python = ">=3.12"
 dependencies = [
-    "fastapi[standard]>=0.116.1",
+  "fastapi>=0.104.0",
+  "uvicorn[standard]>=0.24.0",
+  "sqlalchemy[asyncio]>=2.0.23",
+  "aiosqlite>=0.19.0",
+  "asyncpg>=0.29.0",
+  "alembic>=1.13.0",
+  "pydantic>=2.5.0",
+  "pydantic-settings>=2.1.0",
+  "python-jose[cryptography]>=3.3.0",
+  "passlib[bcrypt]>=1.7.4",
+  "python-multipart>=0.0.6",
+  "aiofiles>=23.2.1",
+  "loguru>=0.7.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.1.6",
+  "mypy>=1.7.0",
+  "pytest>=7.4.3",
+  "pytest-asyncio>=0.21.1",
+  "httpx>=0.25.2",
+  "pre-commit>=3.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-org/ticket-system-backend"
+Repository = "https://github.com/your-org/ticket-system-backend.git"
+Issues = "https://github.com/your-org/ticket-system-backend/issues"
+
+[tool.ruff]
+# 設定每行程式碼的最大長度。
+# 這裡設定為 128，是業界常見的標準，比預設的 88 更適合現代寬螢幕。
+line-length = 128
+# 指定 Python 版本。
+# Ruff 會根據此版本檢查語法和提供最佳化建議。
+target-version = "py312"
+
+[tool.ruff.lint]
+# 增加更多有用的規則集：
+# E, F: flake8-errors 和 flake8-flake8, Ruff 的核心錯誤檢查。
+# W: flake8-warnings, 檢查潛在的警告。
+# C: flake8-comprehensions, 建議使用更簡潔的推導式寫法。
+# B: flake8-bugbear, 檢查可能導致 bug 的程式碼模式。
+# I: isort, 管理和檢查 import 排序。
+# UP: pyupgrade, 自動建議更新的 Python 語法。
+# A: flake8-builtins, 避免覆蓋內建函式名 (例如 `list`, `str`)。
+# C4: flake8-comprehensions, 建議更優雅的推導式寫法。
+# SIM: flake8-simplify, 簡化複雜的程式碼。
+select = ["E", "F", "W", "C", "B", "I", "UP", "A", "C4", "SIM"]
+
+# 忽略特定錯誤碼。
+# "B008" 經常在 FastAPI 的 Dependency Injection 中誤判，
+# 忽略它可以避免不必要的警告。
+ignore = ["B008"]
+
+# 新增 Formatter 設定，讓 Ruff 接管格式化工作。
+# 這樣你就不需要再額外安裝 Black 或其他格式化工具了。
+[tool.ruff.format]
+# 預設使用雙引號 "..."。
+quote-style = "double"
+# 使用空格作為縮排。
+indent-style = "space"
+# 確保函式參數列表中的末尾逗號不會被刪除，這有助於版本控制（Git Diff）。
+skip-magic-trailing-comma = false
+# 自動偵測並使用作業系統的換行符號。
+line-ending = "auto"
+
+[tool.ruff.lint.isort]
+# 告訴 Ruff 哪些模組是專案內部程式碼。
+# 這確保 Ruff 在排序 import 時，會將你的 `app` 模組
+# 放在第三方函式庫的 import 下面，符合 PEP 8 規範。
+known-first-party = ["app"]
+
+[tool.mypy]
+# 將 python_version 設定為專案版本
+python_version = "3.12"
+
+# 啟用最嚴格的模式
+strict = true
+
+# 忽略沒有內建型別提示的第三方套件。
+# 這是一個全域的設定，比你手動列出每一個函式庫更好。
+# 它能確保你專注於自己的程式碼，而不是處理第三方套件的型別問題。
+ignore_missing_imports = true
+
+# 這一個設定很重要。如果 strict = true，mypy 會要求所有函式都必須有型別註釋。
+# disallow_untyped_defs = false 則能關閉這個檢查。
+# 這樣一來，你可以先處理有問題的地方，再逐步為舊程式碼增加型別，而不是被一大堆錯誤淹沒。
+disallow_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = ["passlib.*", "jose.*"]
+ignore_missing_imports = true

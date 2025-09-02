@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    // 前端開發工具
+    "esbenp.prettier-vscode", // Prettier 格式化工具
+    "dbaeumer.vscode-eslint", // ESLint 靜態檢查
+    "Vue.volar", // Vue 3 語言支援
+    "ms-vscode.vscode-typescript-next", // TypeScript 支援
+    "ms-playwright.playwright", // Playwright E2E 測試
+
+    // Python 後端開發工具
+    "ms-python.python", // Python 基礎支援
+    "charliermarsh.ruff", // Ruff 格式化與 Linting
+    "ms-python.pylance" // Pylance 智慧提示
+  ]
+}

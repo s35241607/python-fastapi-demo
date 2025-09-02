@@ -1,4 +1,35 @@
 {
-    "python.defaultInterpreterPath": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend\\.venv\\Scripts\\python.exe",
-    "python.terminal.activateEnvironment": true
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
+  "python.testing.pytestEnabled": true,
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.typeCheckingMode": "strict",
+  "python.defaultInterpreterPath": "./backend/.venv/Scripts/python.exe",
+  // 針對 Python 檔案的特定設定
+  "[python]": {
+    // 設定預設的格式化工具為 Ruff
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    // 啟用「儲存時自動格式化」
+    "editor.formatOnSave": true,
+    // 啟用「儲存時自動修正」，Ruff 會自動修復所有能修復的 Lint 錯誤
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit", // 'explicit' 表示只執行 ruff 的 fixAll
+      "source.organizeImports": "explicit" // 讓 ruff 處理 import 排序
+    }
+  },
+
+  // Ruff 設定
+  "ruff.enable": true,
+  "ruff.importStrategy": "fromEnvironment",
+
+  // 檔案總管設定，隱藏一些不常需要看到的檔案
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.ruff_cache": true
+  }
 }
