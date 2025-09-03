@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "ticket-system-backend"
 version = "0.1.0"
@@ -20,6 +24,11 @@ dependencies = [
   "aiofiles>=23.2.1",
   "loguru>=0.7.0",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+exclude = ["tests*", "logs*", "alembic*", "node_modules*"]
 
 [project.optional-dependencies]
 dev = [

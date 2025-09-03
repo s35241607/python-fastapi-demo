@@ -1,18 +1,156 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "FastAPI Debug",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend\\main.py",
-            "console": "integratedTerminal",
-            "env": {
-                "PYTHONPATH": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend"
-            },
-            "args": [
-                "--reload"
-            ]
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🚀 Start FastAPI Server (uv)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development"
+      },
+      "args": [],
+      "justMyCode": true,
+      "autoReload": {
+        "enable": true
+      }
+    },
+    {
+      "name": "🧪 Run Core Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development"
+      },
+      "args": [
+        "tests/test_error_handler.py",
+        "tests/test_logging_middleware.py",
+        "tests/test_jwt_parser.py",
+        "tests/test_middleware_integration.py",
+        "-v",
+        "--tb=short"
+      ],
+      "justMyCode": false
+    },
+    {
+      "name": "🔧 Run Single Test File",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development"
+      },
+      "args": ["${file}", "-v", "--tb=short"],
+      "justMyCode": false
+    },
+    {
+      "name": "🐛 Debug FastAPI Server (uv)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development",
+        "DEBUG": "true"
+      },
+      "args": [],
+      "justMyCode": false,
+      "stopOnEntry": false
+    },
+    {
+      "name": "⚡ FastAPI with Uvicorn (uv)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development"
+      },
+      "args": [
+        "app.main:app",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--reload",
+        "--log-level",
+        "info"
+      ],
+      "justMyCode": false,
+      "stopOnEntry": false
+    },
+    {
+      "name": "🧪 Debug Current Test",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development"
+      },
+      "args": ["${file}", "-v", "--tb=long", "-s"],
+      "justMyCode": false,
+      "stopOnEntry": false
+    },
+    {
+      "name": "🔍 Run Integration Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/tests/run_integration_tests.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development"
+      },
+      "args": ["--fast"],
+      "justMyCode": false
+    },
+    {
+      "name": "⚡ Run Specific Test Method",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend",
+        "ENVIRONMENT": "development"
+      },
+      "args": ["${file}::${input:testMethod}", "-v", "--tb=short", "-s"],
+      "justMyCode": false
+    }
+  ],
+  "inputs": [
+    {
+      "id": "testMethod",
+      "description": "Test method name",
+      "default": "test_",
+      "type": "promptString"
+    }
+  ]
 }

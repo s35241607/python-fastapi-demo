@@ -1,35 +1,47 @@
 {
-  "editor.formatOnSave": true,
-  "files.eol": "\n",
-  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
-  "python.testing.pytestEnabled": true,
-  "python.terminal.activateEnvironment": true,
-  "python.analysis.typeCheckingMode": "strict",
   "python.defaultInterpreterPath": "./backend/.venv/Scripts/python.exe",
-  // 針對 Python 檔案的特定設定
-  "[python]": {
-    // 設定預設的格式化工具為 Ruff
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    // 啟用「儲存時自動格式化」
-    "editor.formatOnSave": true,
-    // 啟用「儲存時自動修正」，Ruff 會自動修復所有能修復的 Lint 錯誤
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit", // 'explicit' 表示只執行 ruff 的 fixAll
-      "source.organizeImports": "explicit" // 讓 ruff 處理 import 排序
-    }
-  },
-
-  // Ruff 設定
-  "ruff.enable": true,
-  "ruff.importStrategy": "fromEnvironment",
-
-  // 檔案總管設定，隱藏一些不常需要看到的檔案
+  "python.terminal.activateEnvironment": true,
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": ["backend/tests"],
+  "python.testing.cwd": "${workspaceFolder}/backend",
+  "python.linting.enabled": true,
+  "python.linting.ruffEnabled": true,
+  "python.formatting.provider": "ruff",
+  "python.linting.ruffArgs": [
+    "--config=${workspaceFolder}/backend/pyproject.toml"
+  ],
   "files.exclude": {
     "**/__pycache__": true,
     "**/.pytest_cache": true,
-    "**/.ruff_cache": true
+    "**/node_modules": true,
+    "**/.git": false
+  },
+  "python.envFile": "${workspaceFolder}/backend/.env.development",
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder}/backend",
+    "ENVIRONMENT": "development"
+  },
+  "terminal.integrated.env.linux": {
+    "PYTHONPATH": "${workspaceFolder}/backend",
+    "ENVIRONMENT": "development"
+  },
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${workspaceFolder}/backend",
+    "ENVIRONMENT": "development"
+  },
+  "python.analysis.extraPaths": ["${workspaceFolder}/backend"],
+  "python.analysis.autoSearchPaths": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    }
   }
 }

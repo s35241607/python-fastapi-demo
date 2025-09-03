@@ -1,52 +1,131 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Run FastAPI Dev Server",
-            "type": "shell",
-            "command": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend\\.venv\\Scripts\\python.exe",
-            "args": [
-                "-m",
-                "uvicorn",
-                "main:app",
-                "--reload"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            },
-            "options": {
-                "cwd": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend"
-            }
-        },
-        {
-            "label": "Run FastAPI Prod Server",
-            "type": "shell",
-            "command": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend\\.venv\\Scripts\\python.exe",
-            "args": [
-                "-m",
-                "uvicorn",
-                "main:app",
-                "--host",
-                "0.0.0.0",
-                "--port",
-                "8000"
-            ],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared"
-            },
-            "options": {
-                "cwd": "c:\\Users\\User\\Desktop\\新增資料夾\\python-fastapi-demo\\backend"
-            }
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🐳 Start Docker Services",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["up", "-d"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🛑 Stop Docker Services",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["down"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📊 Check Docker Status",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["ps"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🧪 Run Core Tests in Docker",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": [
+        "exec",
+        "backend",
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_error_handler.py",
+        "tests/test_logging_middleware.py",
+        "tests/test_jwt_parser.py",
+        "tests/test_middleware_integration.py",
+        "-v"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🌐 Test API Endpoints",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-File", "${workspaceFolder}/scripts/test-api.ps1"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📝 View Application Logs",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["logs", "-f", "backend"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔧 Install Python Dependencies",
+      "type": "shell",
+      "command": "pip",
+      "args": ["install", "-e", "."],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    }
+  ]
 }
